@@ -58,7 +58,23 @@
     .referencia{margin-top:12px;font-size:15px;color:#ffb3c9;background:rgba(255,215,0,0.05);padding:8px 16px;border-radius:30px;display:inline-block;border:1px solid rgba(255,215,0,0.08)}
     .referencia strong{color:#ffd700}
     .obs-calc{font-size:14px;color:#777;margin-top:16px;font-style:italic;border-top:1px solid rgba(255,255,255,0.05);padding-top:16px}
-    @media(max-width:700px){header h1{font-size:38px}header p{font-size:18px;letter-spacing:3px}.form-calc .campo{flex:1 0 100%}.btn-calc{max-width:100%}.resultado-linha{flex-direction:column;align-items:flex-start}.tamanho-sugerido{font-size:28px}.frase-resultado{font-size:17px;padding:6px 16px}.diferenciais{grid-template-columns:1fr}.frases-grid{grid-template-columns:1fr}.calculadora-box h2{font-size:22px;flex-direction:column;align-items:flex-start}.calculadora-box h2 small{font-size:13px;margin-left:0}.contato-links{flex-direction:column;gap:8px}.barra-marcador{width:16px;height:16px}.barra-marcador::after{font-size:11px;top:-24px}}
+
+    /* RANK */
+    .rank-box{background:linear-gradient(145deg,rgba(20,10,15,0.95),rgba(40,10,30,0.9));backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-radius:24px;padding:32px 30px;margin-bottom:28px;border:1px solid rgba(255,215,0,0.15);box-shadow:0 8px 40px rgba(255,215,0,0.05);transition:transform .3s ease}
+    .rank-box:hover{transform:translateY(-3px)}
+    .rank-box h2{color:#ffd700;font-size:26px;margin-bottom:18px;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(255,215,0,0.1);padding-bottom:14px}
+    .rank-item{display:flex;align-items:center;justify-content:space-between;padding:10px 16px;border-radius:12px;margin-bottom:6px;background:rgba(255,255,255,0.03);transition:all .3s}
+    .rank-item:hover{background:rgba(255,215,0,0.05)}
+    .rank-item .pos{font-size:20px;font-weight:700;min-width:50px;color:#888}
+    .rank-item .pos.gold{color:#ffd700}
+    .rank-item .pos.silver{color:#c0c0c0}
+    .rank-item .pos.bronze{color:#cd7f32}
+    .rank-item .nome{flex:1;font-size:17px;font-weight:600;color:#eee}
+    .rank-item .nome.você{color:#ff2d75;font-weight:800}
+    .rank-item .tam{font-size:18px;font-weight:700;color:#ffd700;background:rgba(255,215,0,0.08);padding:2px 14px;border-radius:30px;border:1px solid rgba(255,215,0,0.08)}
+    .rank-item .tam.destaque-rank{color:#ff2d75;border-color:#ff2d75;background:rgba(255,45,117,0.12)}
+    .rank-vazio{text-align:center;color:#666;padding:20px;font-style:italic}
+    @media(max-width:700px){header h1{font-size:38px}header p{font-size:18px;letter-spacing:3px}.form-calc .campo{flex:1 0 100%}.btn-calc{max-width:100%}.resultado-linha{flex-direction:column;align-items:flex-start}.tamanho-sugerido{font-size:28px}.frase-resultado{font-size:17px;padding:6px 16px}.diferenciais{grid-template-columns:1fr}.frases-grid{grid-template-columns:1fr}.calculadora-box h2{font-size:22px;flex-direction:column;align-items:flex-start}.calculadora-box h2 small{font-size:13px;margin-left:0}.contato-links{flex-direction:column;gap:8px}.barra-marcador{width:16px;height:16px}.barra-marcador::after{font-size:11px;top:-24px}.rank-item{flex-wrap:wrap;gap:6px}.rank-item .nome{flex:1 0 100%;font-size:15px}}
     @media(min-width:701px)and(max-width:1024px){.form-calc .campo{flex:1 0 calc(50% - 25px)}}
   </style>
 </head>
@@ -87,6 +103,18 @@
 </div>
 <div class="obs-calc">* Cálculo baseado em correlações antropométricas e estudos de ergonomia. O resultado é uma sugestão aproximada.</div>
 </div>
+
+<!-- RANK -->
+<div class="rank-box" id="rankBox">
+<h2>🏆 RANK DOS LENDÁRIOS</h2>
+<div id="rankLista">
+<div class="rank-item"><span class="pos gold">🥇</span><span class="nome">Otniel Martins Martins</span><span class="tam">25 cm</span></div>
+<div class="rank-item"><span class="pos silver">🥈</span><span class="nome">Juliano Soares</span><span class="tam">24 cm</span></div>
+<div class="rank-item"><span class="pos bronze">🥉</span><span class="nome">Pedro Fuchs</span><span class="tam">23 cm</span></div>
+<div id="rankVoceContainer"></div>
+</div>
+</div>
+
 <div class="box"><h2>💎 Quem Somos</h2><p><b>Otniel Martins Martins</b>, de <b>Bossoroca - RS</b>, é empreendedor e proprietário da <b>Otniel Consolos</b>, uma loja especializada em produtos para o bem-estar íntimo, reconhecida na região pelo atendimento discreto e pela qualidade dos produtos.</p><p style="margin-top:12px;">Nosso compromisso é oferecer uma experiência segura, respeitosa e com total privacidade para todos os clientes.</p></div>
 <div class="box"><h2>⭐ Nossos Diferenciais</h2><div class="diferenciais"><p>✔ Atendimento totalmente discreto</p><p>✔ Produtos de alta qualidade</p><p>✔ Atendimento com respeito e confiança</p><p>✔ Privacidade garantida</p></div></div>
 <div class="box"><h2>💬 Frases</h2><div class="frases-grid"><p>❤️ Viva novas experiências</p><p>🔒 Discrição em primeiro lugar</p><p>✨ Qualidade que faz a diferença</p><p>🙌 Seu bem-estar é a nossa prioridade</p></div></div>
@@ -106,6 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var div = document.getElementById('resultadoCalc');
   var barra = document.getElementById('barraFill');
   var marcador = document.getElementById('barraMarcador');
+  var rankVoce = document.getElementById('rankVoceContainer');
 
   var frases = {
     masculino: [
@@ -117,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function() {
       {min:19,max:21,texto:"Poço também, cabe até dois"},
       {min:21,max:23,texto:"Monstro, respeita os novatos"},
       {min:23,max:25,texto:"Cavalo, vai com calma que o cu dói"},
-      {min:25,max:28,texto:"Se isso entrar, o cu abre e não volta mais"}
+      {min:25,max:35,texto:"Se isso entrar, o cu abre e não volta mais"}
     ],
     feminino: [
       {min:8,max:11,texto:"Tá com fome não? Isso é só um lanchinho"},
@@ -128,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
       {min:19,max:21,texto:"Poço artesiano, cabe até a cabeça"},
       {min:21,max:23,texto:"Já é um poço, cabe o braço e a perna"},
       {min:23,max:25,texto:"Lendária, cabe até o Shrek"},
-      {min:25,max:28,texto:"Isso já não é mais buraco, é um túnel"}
+      {min:25,max:35,texto:"Isso já não é mais buraco, é um túnel"}
     ],
     outro: [
       {min:8,max:11,texto:"Iniciante, vai com calma"},
@@ -139,7 +168,7 @@ document.addEventListener('DOMContentLoaded', function() {
       {min:19,max:21,texto:"Profissional, aguenta muito"},
       {min:21,max:23,texto:"Especialista, aguenta demais"},
       {min:23,max:25,texto:"Lendário, é raro"},
-      {min:25,max:28,texto:"Monstro, coragem!"}
+      {min:25,max:35,texto:"Monstro, coragem!"}
     ]
   };
 
@@ -151,6 +180,54 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     }
     return "Tamanho fora da escala...";
+  }
+
+  function atualizarRank(tamanho) {
+    var rankTop = [
+      {nome: "Otniel Martins Martins", tam: 25, emoji: "🥇", classe: "gold"},
+      {nome: "Juliano Soares", tam: 24, emoji: "🥈", classe: "silver"},
+      {nome: "Pedro Fuchs", tam: 23, emoji: "🥉", classe: "bronze"}
+    ];
+
+    var html = '';
+    var adicionou = false;
+
+    for (var i = 0; i < rankTop.length; i++) {
+      var item = rankTop[i];
+      html += '<div class="rank-item"><span class="pos ' + item.classe + '">' + item.emoji + '</span><span class="nome">' + item.nome + '</span><span class="tam">' + item.tam + ' cm</span></div>';
+
+      // Insere "Você" se o tamanho for maior ou igual ao próximo
+      if (!adicionou && tamanho >= 22 && i < rankTop.length - 1) {
+        if (tamanho >= rankTop[i].tam) {
+          html += rankVoceHtml(tamanho, i);
+          adicionou = true;
+        }
+      }
+      // Se for maior que o último (23+)
+      if (!adicionou && i === rankTop.length - 1) {
+        if (tamanho >= 23) {
+          html += rankVoceHtml(tamanho, i + 1);
+          adicionou = true;
+        }
+      }
+    }
+
+    // Se não entrou em nenhuma posição, coloca no final se for >= 22
+    if (!adicionou && tamanho >= 22) {
+      html += rankVoceHtml(tamanho, rankTop.length);
+    }
+
+    rankVoce.innerHTML = html;
+  }
+
+  function rankVoceHtml(tamanho, pos) {
+    var emoji = '';
+    var classe = '';
+    if (pos === 0) { emoji = '🥇'; classe = 'gold'; }
+    else if (pos === 1) { emoji = '🥈'; classe = 'silver'; }
+    else if (pos === 2) { emoji = '🥉'; classe = 'bronze'; }
+    else { emoji = '#' + (pos + 1); classe = ''; }
+    return '<div class="rank-item" style="background:rgba(255,45,117,0.08);border:1px solid rgba(255,45,117,0.15)"><span class="pos ' + classe + '">' + emoji + '</span><span class="nome você">🔥 VOCÊ</span><span class="tam destaque-rank">' + tamanho.toFixed(1) + ' cm</span></div>';
   }
 
   function calcular() {
@@ -166,13 +243,14 @@ document.addEventListener('DOMContentLoaded', function() {
       barra.style.width = '0%';
       marcador.style.left = '0%';
       marcador.setAttribute('data-valor', '0');
+      rankVoce.innerHTML = '';
       return;
     }
 
     var fatorGen = 1.0;
-    if (g === 'feminino') fatorGen = 1.0;
-    else if (g === 'masculino') fatorGen = 0.85;
-    else fatorGen = 0.92;
+    if (g === 'feminino') fatorGen = 1.35;
+    else if (g === 'masculino') fatorGen = 0.75;
+    else fatorGen = 0.95;
 
     var fatorIdade = 1.0;
     if (i > 40) fatorIdade = 1.0 - (i - 40) * 0.0025;
@@ -190,7 +268,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var tamanho = 16.5 * fatorGen * fatorIdade * fatorAltura * fatorPeso;
     if (tamanho < 8.0) tamanho = 8.0;
-    if (tamanho > 28.0) tamanho = 28.0;
+    if (tamanho > 35.0) tamanho = 35.0;
+
     tamanho = Math.round(tamanho * 10) / 10;
 
     result.textContent = tamanho.toFixed(1);
@@ -203,6 +282,9 @@ document.addEventListener('DOMContentLoaded', function() {
     barra.style.width = percentual + '%';
     marcador.style.left = percentual + '%';
     marcador.setAttribute('data-valor', tamanho.toFixed(1));
+
+    // ATUALIZA O RANK
+    atualizarRank(tamanho);
   }
 
   btn.addEventListener('click', calcular);
