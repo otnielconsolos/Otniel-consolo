@@ -94,3 +94,130 @@
 <div class="box"><h2>📱 Contato</h2><div class="contato-links"><p>📷 <b>Instagram</b><br><a href="https://www.instagram.com/xxwz_.09?igsh=ZjRmMnpwY3gzY211" target="_blank">@xxwz_.09</a></p><p>💬 <b>WhatsApp</b><br><a href="https://wa.me/555599947837" target="_blank">+55 55 9994-7837</a></p></div></div>
 </div>
 <footer><h3>OTNIEL CONSOLOS</h3><p>Empreendedor: <b>Otniel Martins Martins</b> — Bossoroca - RS</p><p>© 2026 Otniel Consolos. Todos os direitos reservados.</p></footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var btn = document.getElementById('calcularBtn');
+  var idade = document.getElementById('idade');
+  var genero = document.getElementById('genero');
+  var altura = document.getElementById('altura');
+  var peso = document.getElementById('peso');
+  var result = document.getElementById('tamanhoIdeal');
+  var frase = document.getElementById('fraseResultado');
+  var div = document.getElementById('resultadoCalc');
+  var barra = document.getElementById('barraFill');
+  var marcador = document.getElementById('barraMarcador');
+
+  var frases = {
+    masculino: [
+      {min:8,max:11,texto:"Frouxo, vai treinar esse cu"},
+      {min:11,max:13,texto:"Iniciante, mas já quer dar"},
+      {min:13,max:15,texto:"Guloso, mas ainda tá aprendendo"},
+      {min:15,max:17,texto:"O cu já pede arrego"},
+      {min:17,max:19,texto:"Caguei de medo? Aguenta firme"},
+      {min:19,max:21,texto:"Poço também, cabe até dois"},
+      {min:21,max:23,texto:"Monstro, respeita os novatos"},
+      {min:23,max:25,texto:"Cavalo, vai com calma que o cu dói"},
+      {min:25,max:28,texto:"Se isso entrar, o cu abre e não volta mais"}
+    ],
+    feminino: [
+      {min:8,max:11,texto:"Tá com fome não? Isso é só um lanchinho"},
+      {min:11,max:13,texto:"Começou bem, mas quer o prato principal"},
+      {min:13,max:15,texto:"Gulosa, mas ainda cabe tranquilo"},
+      {min:15,max:17,texto:"O buraco já é mais embaixo"},
+      {min:17,max:19,texto:"Buracão, cabe um braço"},
+      {min:19,max:21,texto:"Poço artesiano, cabe até a cabeça"},
+      {min:21,max:23,texto:"Já é um poço, cabe o braço e a perna"},
+      {min:23,max:25,texto:"Lendária, cabe até o Shrek"},
+      {min:25,max:28,texto:"Isso já não é mais buraco, é um túnel"}
+    ],
+    outro: [
+      {min:8,max:11,texto:"Iniciante, vai com calma"},
+      {min:11,max:13,texto:"Já dá pro gasto"},
+      {min:13,max:15,texto:"Tamanho confiável"},
+      {min:15,max:17,texto:"Intermediário, tá evoluindo"},
+      {min:17,max:19,texto:"Avançado, aguenta bem"},
+      {min:19,max:21,texto:"Profissional, aguenta muito"},
+      {min:21,max:23,texto:"Especialista, aguenta demais"},
+      {min:23,max:25,texto:"Lendário, é raro"},
+      {min:25,max:28,texto:"Monstro, coragem!"}
+    ]
+  };
+
+  function obterFrase(tamanho, gen) {
+    var lista = frases[gen] || frases.outro;
+    for (var i = 0; i < lista.length; i++) {
+      if (tamanho >= lista[i].min && tamanho <= lista[i].max) {
+        return lista[i].texto;
+      }
+    }
+    return "Tamanho fora da escala...";
+  }
+
+  function calcular() {
+    var i = parseFloat(idade.value);
+    var g = genero.value;
+    var a = parseFloat(altura.value);
+    var p = parseFloat(peso.value);
+
+    if (isNaN(i) || isNaN(a) || isNaN(p) || i < 1 || a < 50 || p < 5) {
+      result.textContent = '?';
+      frase.textContent = 'Preencha todos os campos corretamente';
+      div.classList.remove('destaque');
+      barra.style.width = '0%';
+      marcador.style.left = '0%';
+      marcador.setAttribute('data-valor', '0');
+      return;
+    }
+
+    var fatorGen = 1.0;
+    if (g === 'feminino') fatorGen = 1.0;
+    else if (g === 'masculino') fatorGen = 0.85;
+    else fatorGen = 0.92;
+
+    var fatorIdade = 1.0;
+    if (i > 40) fatorIdade = 1.0 - (i - 40) * 0.0025;
+    else if (i < 18) fatorIdade = 1.0 + (18 - i) * 0.002;
+    if (fatorIdade < 0.80) fatorIdade = 0.80;
+    if (fatorIdade > 1.12) fatorIdade = 1.12;
+
+    var fatorAltura = a / 170;
+    var imc = p / ((a/100) * (a/100));
+    var fatorPeso = 1.0;
+    if (imc < 18.5) fatorPeso = 0.92;
+    else if (imc >= 18.5 && imc < 25) fatorPeso = 1.0;
+    else if (imc >= 25 && imc < 30) fatorPeso = 1.05;
+    else fatorPeso = 1.10;
+
+    var tamanho = 16.5 * fatorGen * fatorIdade * fatorAltura * fatorPeso;
+    if (tamanho < 8.0) tamanho = 8.0;
+    if (tamanho > 28.0) tamanho = 28.0;
+    tamanho = Math.round(tamanho * 10) / 10;
+
+    result.textContent = tamanho.toFixed(1);
+    frase.textContent = obterFrase(tamanho, g);
+    div.classList.add('destaque');
+
+    var percentual = ((tamanho - 10) / (40 - 10)) * 100;
+    if (percentual < 0) percentual = 0;
+    if (percentual > 100) percentual = 100;
+    barra.style.width = percentual + '%';
+    marcador.style.left = percentual + '%';
+    marcador.setAttribute('data-valor', tamanho.toFixed(1));
+  }
+
+  btn.addEventListener('click', calcular);
+  var inputs = [idade, altura, peso, genero];
+  for (var j = 0; j < inputs.length; j++) {
+    inputs[j].addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        calcular();
+      }
+    });
+  }
+
+  calcular();
+});
+</script>
+</body>
+</html>
