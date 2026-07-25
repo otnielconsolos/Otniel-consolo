@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Otniel Consolos</title>
   <style>
     * {
@@ -146,7 +146,40 @@
       text-decoration: underline;
     }
 
-    /* CALCULADORA ESPECIAL */
+    .contato-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px 40px;
+      margin-top: 8px;
+    }
+
+    .contato-links p {
+      margin: 0;
+    }
+
+    footer {
+      background: #000;
+      text-align: center;
+      padding: 30px 20px;
+      border-top: 1px solid rgba(255, 45, 117, 0.1);
+    }
+
+    footer h3 {
+      color: #ff4f8b;
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    footer p {
+      color: #777;
+      font-size: 14px;
+    }
+
+    footer p b {
+      color: #ffb3c9;
+    }
+
+    /* ===== CALCULADORA ===== */
     .calculadora-box {
       background: linear-gradient(145deg, rgba(20, 10, 15, 0.95), rgba(40, 10, 30, 0.9));
       backdrop-filter: blur(12px);
@@ -258,41 +291,122 @@
     }
 
     .resultado-calc {
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.6);
       border-radius: 16px;
       padding: 22px 26px;
       margin-top: 22px;
+      border-left: 5px solid #ffd700;
+      transition: all 0.3s ease;
+    }
+
+    .resultado-calc.destaque {
+      background: rgba(255, 215, 0, 0.08);
+      border-left-color: #ff2d75;
+      box-shadow: 0 0 30px rgba(255, 45, 117, 0.15);
+    }
+
+    .resultado-linha {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      border-left: 5px solid #ffd700;
       gap: 14px;
     }
 
-    .resultado-calc .tamanho-sugerido {
-      font-size: 32px;
+    .tamanho-sugerido {
+      font-size: 36px;
       font-weight: 900;
       color: #ffd700;
     }
 
-    .resultado-calc .tamanho-sugerido span {
-      font-size: 24px;
+    .tamanho-sugerido span {
+      font-size: 26px;
       font-weight: 400;
       color: #ccc;
       margin-left: 6px;
     }
 
-    .resultado-calc .referencia {
-      background: rgba(255, 215, 0, 0.10);
+    .frase-resultado {
+      font-size: 20px;
+      font-weight: 600;
+      color: #ff7eb3;
+      background: rgba(255, 45, 117, 0.10);
       padding: 8px 20px;
       border-radius: 40px;
-      border: 1px solid rgba(255, 215, 0, 0.15);
-      font-size: 15px;
-      color: #ffb3c9;
+      border: 1px solid rgba(255, 45, 117, 0.15);
     }
 
-    .resultado-calc .referencia strong {
+    /* BARRA DE PROGRESSO */
+    .barra-wrapper {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .barra-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 6px;
+    }
+
+    .barra-track {
+      position: relative;
+      width: 100%;
+      height: 10px;
+      background: #2a2a2a;
+      border-radius: 20px;
+      overflow: visible;
+    }
+
+    .barra-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 20px;
+      background: linear-gradient(90deg, #4caf50, #ffeb3b, #f44336);
+      transition: width 0.6s ease;
+    }
+
+    .barra-marcador {
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 20px;
+      height: 20px;
+      background: #ffd700;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      box-shadow: 0 0 16px rgba(255, 215, 0, 0.6);
+      transition: left 0.6s ease;
+      left: 0%;
+      pointer-events: none;
+    }
+
+    .barra-marcador::after {
+      content: attr(data-valor) 'cm';
+      position: absolute;
+      top: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffd700;
+      white-space: nowrap;
+    }
+
+    .referencia {
+      margin-top: 12px;
+      font-size: 15px;
+      color: #ffb3c9;
+      background: rgba(255, 215, 0, 0.05);
+      padding: 8px 16px;
+      border-radius: 30px;
+      display: inline-block;
+      border: 1px solid rgba(255, 215, 0, 0.08);
+    }
+
+    .referencia strong {
       color: #ffd700;
     }
 
@@ -303,39 +417,6 @@
       font-style: italic;
       border-top: 1px solid rgba(255, 255, 255, 0.05);
       padding-top: 16px;
-    }
-
-    .contato-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 16px 40px;
-      margin-top: 8px;
-    }
-
-    .contato-links p {
-      margin: 0;
-    }
-
-    footer {
-      background: #000;
-      text-align: center;
-      padding: 30px 20px;
-      border-top: 1px solid rgba(255, 45, 117, 0.1);
-    }
-
-    footer h3 {
-      color: #ff4f8b;
-      font-size: 22px;
-      margin-bottom: 6px;
-    }
-
-    footer p {
-      color: #777;
-      font-size: 14px;
-    }
-
-    footer p b {
-      color: #ffb3c9;
     }
 
     @media (max-width: 700px) {
@@ -352,9 +433,16 @@
       .btn-calc {
         max-width: 100%;
       }
-      .resultado-calc {
+      .resultado-linha {
         flex-direction: column;
         align-items: flex-start;
+      }
+      .tamanho-sugerido {
+        font-size: 28px;
+      }
+      .frase-resultado {
+        font-size: 17px;
+        padding: 6px 16px;
       }
       .diferenciais {
         grid-template-columns: 1fr;
@@ -374,6 +462,14 @@
       .contato-links {
         flex-direction: column;
         gap: 8px;
+      }
+      .barra-marcador {
+        width: 16px;
+        height: 16px;
+      }
+      .barra-marcador::after {
+        font-size: 11px;
+        top: -24px;
       }
     }
 
@@ -403,7 +499,7 @@
       <div class="form-calc">
         <div class="campo">
           <label for="idade">Idade</label>
-          <input type="number" id="idade" placeholder="Ex: 25" min="1" max="80">
+          <input type="number" id="idade" placeholder="Ex: 25" min="1" max="80" value="25">
         </div>
         <div class="campo">
           <label for="genero">Gênero</label>
@@ -415,20 +511,36 @@
         </div>
         <div class="campo">
           <label for="altura">Altura (cm)</label>
-          <input type="number" id="altura" placeholder="Ex: 175" min="50" max="250">
+          <input type="number" id="altura" placeholder="Ex: 175" min="50" max="250" value="175">
         </div>
         <div class="campo">
           <label for="peso">Peso (kg)</label>
-          <input type="number" id="peso" placeholder="Ex: 70" min="5" max="300">
+          <input type="number" id="peso" placeholder="Ex: 70" min="5" max="300" value="70">
         </div>
       </div>
 
       <button class="btn-calc" id="calcularBtn">🔥 Calcular tamanho ideal</button>
 
       <div class="resultado-calc" id="resultadoCalc">
-        <div class="tamanho-sugerido">
-          <span id="tamanhoIdeal">--</span> <span>cm</span>
+        <div class="resultado-linha">
+          <div class="tamanho-sugerido">
+            <span id="tamanhoIdeal">--</span> <span>cm</span>
+          </div>
+          <div class="frase-resultado" id="fraseResultado">Preencha os dados e calcule</div>
         </div>
+
+        <!-- BARRA DE PROGRESSO -->
+        <div class="barra-wrapper">
+          <div class="barra-labels">
+            <span>10 cm</span>
+            <span>40 cm</span>
+          </div>
+          <div class="barra-track">
+            <div class="barra-fill" id="barraFill" style="width:0%;"></div>
+            <div class="barra-marcador" id="barraMarcador" data-valor="0" style="left:0%;"> </div>
+          </div>
+        </div>
+
         <div class="referencia">
           💡 <strong>Otniel Martins Martins</strong> → 25 cm
         </div>
@@ -516,6 +628,57 @@
       const alturaInput = document.getElementById('altura');
       const pesoInput = document.getElementById('peso');
       const tamanhoIdealSpan = document.getElementById('tamanhoIdeal');
+      const fraseResultado = document.getElementById('fraseResultado');
+      const resultadoDiv = document.getElementById('resultadoCalc');
+      const barraFill = document.getElementById('barraFill');
+      const barraMarcador = document.getElementById('barraMarcador');
+
+      // Frases por gênero e faixa
+      const frases = {
+        masculino: [
+          { min: 8, max: 11, texto: "Frouxo, vai treinar esse cu" },
+          { min: 11, max: 13, texto: "Iniciante, mas já quer dar" },
+          { min: 13, max: 15, texto: "Guloso, mas ainda tá aprendendo" },
+          { min: 15, max: 17, texto: "O cu já pede arrego" },
+          { min: 17, max: 19, texto: "Caguei de medo? Aguenta firme" },
+          { min: 19, max: 21, texto: "Poço também, cabe até dois" },
+          { min: 21, max: 23, texto: "Monstro, respeita os novatos" },
+          { min: 23, max: 25, texto: "Cavalo, vai com calma que o cu dói" },
+          { min: 25, max: 28, texto: "Se isso entrar, o cu abre e não volta mais" }
+        ],
+        feminino: [
+          { min: 8, max: 11, texto: "Tá com fome não? Isso é só um lanchinho" },
+          { min: 11, max: 13, texto: "Começou bem, mas quer o prato principal" },
+          { min: 13, max: 15, texto: "Gulosa, mas ainda cabe tranquilo" },
+          { min: 15, max: 17, texto: "O buraco já é mais embaixo" },
+          { min: 17, max: 19, texto: "Buracão, cabe um braço" },
+          { min: 19, max: 21, texto: "Poço artesiano, cabe até a cabeça" },
+          { min: 21, max: 23, texto: "Já é um poço, cabe o braço e a perna" },
+          { min: 23, max: 25, texto: "Lendária, cabe até o Shrek" },
+          { min: 25, max: 28, texto: "Isso já não é mais buraco, é um túnel" }
+        ],
+        outro: [
+          { min: 8, max: 11, texto: "Iniciante, vai com calma" },
+          { min: 11, max: 13, texto: "Já dá pro gasto" },
+          { min: 13, max: 15, texto: "Tamanho confiável" },
+          { min: 15, max: 17, texto: "Intermediário, tá evoluindo" },
+          { min: 17, max: 19, texto: "Avançado, aguenta bem" },
+          { min: 19, max: 21, texto: "Profissional, aguenta muito" },
+          { min: 21, max: 23, texto: "Especialista, aguenta demais" },
+          { min: 23, max: 25, texto: "Lendário, é raro" },
+          { min: 25, max: 28, texto: "Monstro, coragem!" }
+        ]
+      };
+
+      function obterFrase(tamanho, genero) {
+        const lista = frases[genero] || frases.outro;
+        for (let item of lista) {
+          if (tamanho >= item.min && tamanho <= item.max) {
+            return item.texto;
+          }
+        }
+        return "Tamanho fora da escala...";
+      }
 
       function calcularTamanhoIdeal() {
         const idade = parseFloat(idadeInput.value);
@@ -525,17 +688,23 @@
 
         if (isNaN(idade) || isNaN(altura) || isNaN(peso) || idade < 1 || altura < 50 || peso < 5) {
           tamanhoIdealSpan.textContent = '?';
+          fraseResultado.textContent = 'Preencha todos os campos corretamente';
+          resultadoDiv.classList.remove('destaque');
+          barraFill.style.width = '0%';
+          barraMarcador.style.left = '0%';
+          barraMarcador.setAttribute('data-valor', '0');
           return;
         }
 
         // Fatores
         let fatorGenero = 1.0;
-        if (genero === 'feminino') fatorGenero = 0.92;
-        else if (genero === 'outro') fatorGenero = 0.96;
+        if (genero === 'feminino') fatorGenero = 1.0;
+        else if (genero === 'masculino') fatorGenero = 0.85; // ânus menos elástico
+        else fatorGenero = 0.92;
 
         let fatorIdade = 1.0;
         if (idade > 40) fatorIdade = 1.0 - (idade - 40) * 0.0025;
-        else if (idade < 18) fatorIdade = 1.0 + (18 - idade) * 0.002; // ajuste para jovens
+        else if (idade < 18) fatorIdade = 1.0 + (18 - idade) * 0.002;
         if (fatorIdade < 0.80) fatorIdade = 0.80;
         if (fatorIdade > 1.12) fatorIdade = 1.12;
 
@@ -557,30 +726,16 @@
         if (tamanho > 28.0) tamanho = 28.0;
 
         tamanho = Math.round(tamanho * 10) / 10;
+
+        // Exibe resultado
         tamanhoIdealSpan.textContent = tamanho.toFixed(1);
-      }
+        const frase = obterFrase(tamanho, genero);
+        fraseResultado.textContent = frase;
 
-      calcularBtn.addEventListener('click', calcularTamanhoIdeal);
+        // Destaque
+        resultadoDiv.classList.add('destaque');
 
-      const inputs = [idadeInput, alturaInput, pesoInput, generoSelect];
-      inputs.forEach(input => {
-        input.addEventListener('keypress', function(e) {
-          if (e.key === 'Enter') {
-            e.preventDefault();
-            calcularBtn.click();
-          }
-        });
-      });
-
-      window.addEventListener('load', function() {
-        idadeInput.value = '25';
-        generoSelect.value = 'masculino';
-        alturaInput.value = '175';
-        pesoInput.value = '70';
-        calcularTamanhoIdeal();
-      });
-    })();
-  </script>
-
-</body>
-</html>
+        // Barra (10 a 40 cm)
+        let percentual = ((tamanho - 10) / (40 - 10)) * 100;
+        if (percentual < 0) percentual = 0;
+        if (percentual > 100) percentua
