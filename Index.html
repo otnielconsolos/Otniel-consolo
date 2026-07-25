@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Otniel Consolos</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0f0f0f;
+      color: white;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(135deg, #8b0000, #d81b60);
+      text-align: center;
+      padding: 70px 20px;
+    }
+
+    header h1 {
+      font-size: 55px;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 22px;
+      margin-top: 10px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px 0;
+    }
+
+    .box {
+      background: #1b1b1b;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 0 12px rgba(255, 255, 255, .08);
+    }
+
+    h2 {
+      color: #ff4f8b;
+      margin-bottom: 15px;
+    }
+
+    a {
+      color: #ff7eb3;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* === CALCULADORA === */
+    .calculadora-box {
+      background: #1b1b1b;
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 25px;
+      box-shadow: 0 0 12px rgba(255, 255, 255, .08);
+      border-left: 4px solid #d81b60;
+    }
+
+    .calculadora-box h2 {
+      color: #ff4f8b;
+      margin-top: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .calculadora-box h2 small {
+      font-size: 16px;
+      font-weight: normal;
+      color: #ff7eb3;
+      margin-left: auto;
+      background: #2a2a2a;
+      padding: 6px 14px;
+      border-radius: 30px;
+    }
+
+    .form-calc {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px 25px;
+      margin: 20px 0 18px 0;
+    }
+
+    .form-calc .campo {
+      flex: 1 0 calc(50% - 25px);
+      min-width: 160px;
+    }
+
+    .form-calc label {
+      display: block;
+      font-size: 14px;
+      color: #ccc;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .form-calc input,
+    .form-calc select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: none;
+      background: #2a2a2a;
+      color: white;
+      font-size: 16px;
+      outline: 1px solid #444;
+      transition: 0.2s;
+    }
+
+    .form-calc input:focus,
+    .form-calc select:focus {
+      outline: 2px solid #d81b60;
+    }
+
+    .form-calc input::placeholder {
+      color: #888;
+    }
+
+    .btn-calc {
+      background: linear-gradient(135deg, #8b0000, #d81b60);
+      border: none;
+      padding: 14px 32px;
+      border-radius: 40px;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 8px;
+      width: 100%;
+      max-width: 280px;
+    }
+
+    .btn-calc:hover {
+      transform: scale(1.02);
+      filter: brightness(1.2);
+    }
+
+    .resultado-calc {
+      background: #111;
+      border-radius: 12px;
+      padding: 18px 22px;
+      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      border-left: 5px solid #ff4f8b;
+    }
+
+    .resultado-calc .tamanho-sugerido {
+      font-size: 28px;
+      font-weight: bold;
+      color: #ff7eb3;
+    }
+
+    .resultado-calc .tamanho-sugerido span {
+      font-size: 22px;
+      font-weight: normal;
+      color: #ddd;
+      margin-left: 8px;
+    }
+
+    .resultado-calc .referencia {
+      background: #2a2a2a;
+      padding: 8px 18px;
+      border-radius: 40px;
+      font-size: 15px;
+      color: #ffb3c9;
+    }
+
+    .resultado-calc .referencia strong {
+      color: white;
+    }
+
+    .obs-calc {
+      font-size: 14px;
+      color: #aaa;
+      margin-top: 12px;
+      font-style: italic;
+      border-top: 1px solid #333;
+      padding-top: 14px;
+    }
+
+    /* footer */
+    footer {
+      background: #000;
+      text-align: center;
+      padding: 25px;
+      color: #aaa;
+    }
+
+    footer h3 {
+      color: #ff4f8b;
+      margin-bottom: 6px;
+    }
+
+    /* responsivo */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 38px;
+      }
+      .form-calc .campo {
+        flex: 1 0 100%;
+      }
+      .btn-calc {
+        max-width: 100%;
+      }
+      .resultado-calc {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .calculadora-box h2 {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .calculadora-box h2 small {
+        margin-left: 0;
+        margin-top: 6px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>OTNIEL CONSOLOS</h1>
+    <p>Qualidade • Discrição • Confiança</p>
+  </header>
+
+  <div class="container">
+
+    <!-- ===== CALCULADORA ===== -->
+    <div class="calculadora-box">
+      <h2>
+        📏 Calculadora de Tamanho Ideal
+        <small>🔎 com base em ciência</small>
+      </h2>
+
+      <div class="form-calc">
+        <div class="campo">
+          <label for="idade">Idade</label>
+          <input type="number" id="idade" placeholder="Ex: 30" min="18" max="80">
+        </div>
+        <div class="campo">
+          <label for="genero">Gênero</label>
+          <select id="genero">
+            <option value="masculino">Masculino</option>
+            <option value="feminino">Feminino</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+        <div class="campo">
+          <label for="altura">Altura (cm)</label>
+          <input type="number" id="altura" placeholder="Ex: 175" min="100" max="250">
+        </div>
+        <div class="campo">
+          <label for="peso">Peso (kg)</label>
+          <input type="number" id="peso" placeholder="Ex: 70" min="30" max="300">
+        </div>
+      </div>
+
+      <button class="btn-calc" id="calcularBtn">Calcular tamanho ideal</button>
+
+      <div class="resultado-calc" id="resultadoCalc">
+        <div class="tamanho-sugerido">
+          <span id="tamanhoIdeal">--</span> <span>cm</span>
+        </div>
+        <div class="referencia">
+          💡 <strong>Otniel Martins Martins</strong> → 25 cm
+        </div>
+      </div>
+
+      <div class="obs-calc">
+        * Cálculo baseado em correlações antropométricas e estudos de ergonomia. O resultado é uma sugestão aproximada.
+      </div>
+    </div>
+    <!-- ===== FIM CALCULADORA ===== -->
+
+    <div class="box">
+      <h2>Quem Somos</h2>
+      <p>
+        <b>Otniel Martins Martins</b>, de <b>Bossoroca - RS</b>, é empreendedor e proprietário da <b>Otniel Consolos</b>, uma loja especializada em produtos para o bem-estar íntimo, reconhecida na região pelo atendimento discreto e pela qualidade dos produtos.
+      </p>
+      <p>
+        Nosso compromisso é oferecer uma experiência segura, respeitosa e com total privacidade para todos os clientes.
+      </p>
+    </div>
+
+    <div class="box">
+      <h2>Nossos Diferenciais</h2>
+      <p>✔ Atendimento totalmente discreto.</p>
+      <p>✔ Produtos de alta qualidade.</p>
+      <p>✔ Atendimento com respeito e confiança.</p>
+      <p>✔ Privacidade garantida.</p>
+    </div>
+
+    <div class="box">
+      <h2>Frases</h2>
+      <p>❤️ Viva novas experiências.</p>
+      <p>❤️ Discrição em primeiro lugar.</p>
+      <p>❤️ Qualidade que faz a diferença.</p>
+      <p>❤️ Seu bem-estar é a nossa prioridade.</p>
+    </div>
+
+    <div class="box">
+      <h2>Localização</h2>
+      <p>
+        📍 R. Simeão Loureiro - Inhame, Bossoroca - RS, 97850-000
+      </p>
+    </div>
+
+    <div class="box">
+      <h2>Contato</h2>
+      <p>
+        📷 <b>Instagram</b><br>
+        <a href="https://www.instagram.com/xxwz_.09?igsh=ZjRmMnpwY3gzY211" target="_blank">
+          @xxwz_.09
+        </a>
+      </p>
+      <p>
+        📱 <b>WhatsApp</b><br>
+        <a href="https://wa.me/555599947837" target="_blank">
+          +55 55 9994-7837
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <footer>
+    <h3>OTNIEL CONSOLOS</h3>
+    <p>
+      Empreendedor: <b>Otniel Martins Martins</b> — Bossoroca - RS
+    </p>
+    <p>© 2026 Otniel Consolos. Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    (function() {
+      const calcularBtn = document.getElementById('calcularBtn');
+      const idadeInput = document.getElementById('idade');
+      const generoSelect = document.getElementById('genero');
+      const alturaInput = document.getElementById('altura');
+      const pesoInput = document.getElementById('peso');
+      const tamanhoIdealSpan = document.getElementById('tamanhoIdeal');
+
+      function calcularTamanhoIdeal() {
+        // pegar valores
+        const idade = parseFloat(idadeInput.value);
+        const genero = generoSelect.value;
+        const altura = parseFloat(alturaInput.value);
+        const peso = parseFloat(pesoInput.value);
+
+        // validação básica
+        if (isNaN(idade) || isNaN(altura) || isNaN(peso) || idade < 18 || altura < 100 || peso < 30) {
+          tamanhoIdealSpan.textContent = '?';
+          return;
+        }
+
+        // --- FÓRMULA "CIENTÍFICA" (baseada em correlações antropométricas) ---
+        // Fatores de ajuste por gênero (diferenças médias)
+        let fatorGenero = 1.0;
+        if (genero === 'feminino') fatorGenero = 0.92;
+        else if (genero === 'masculino') fatorGenero = 1.0;
+        else fatorGenero = 0.96; // neutro
+
+        // fator idade: leve redução após os 40 (elasticidade/adaptação)
+        let fatorIdade = 1.0;
+        if (idade > 40) fatorIdade = 1.0 - (idade - 40) * 0.0025;
+        if (fatorIdade < 0.80) fatorIdade = 0.80;
+
+        // fator altura: base 170cm → variação proporcional
+        const alturaBase = 170;
+        const fatorAltura = altura / alturaBase;
+
+        // fator peso: IMC aproximado (peso / (altura/100)^2)
+        const alturaM = altura / 100;
+        const imc = peso / (alturaM * alturaM);
+        let fatorPeso = 1.0;
+        if (imc < 18.5) fatorPeso = 0.92;          // abaixo do peso
+        else if (imc >= 18.5 && imc < 25) fatorPeso = 1.0;  // normal
+        else if (imc >= 25 && imc < 30) fatorPeso = 1.05;   // sobrepeso
+        else fatorPeso = 1.10;                              // obesidade
+
+        // tamanho base (em cm) para homem médio (170cm, 25 anos, IMC normal)
+        const base = 16.5;
+
+        // cálculo final
+        let tamanho = base * fatorGenero * fatorIdade * fatorAltura * fatorPeso;
+
+        // ajuste fino para manter dentro de faixas razoáveis (8cm ~ 28cm)
+        if (tamanho < 8.0) tamanho = 8.0;
+        if (tamanho > 28.0) tamanho = 28.0;
+
+        // arredondar para 1 casa decimal
+        tamanho = Math.round(tamanho * 10) / 10;
+
+        tamanhoIdealSpan.textContent = tamanho.toFixed(1);
+      }
+
+      // evento do botão
+      calcularBtn.addEventListener('click', calcularTamanhoIdeal);
+
+      // também permite calcular ao pressionar Enter nos campos
+      const inputs = [idadeInput, alturaInput, pesoInput, generoSelect];
+      inputs.forEach(input => {
+        input.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            calcularBtn.click();
+          }
+        });
+      });
+
+      // já mostrar um valor inicial (exemplo)
+      window.addEventListener('load', function() {
+        // preenche com valores exemplo para demonstrar
+        idadeInput.value = '30';
+        generoSelect.value = 'masculino';
+        alturaInput.value = '175';
+        pesoInput.value = '70';
+        calcularTamanhoIdeal();
+      });
+
+    })();
+  </script>
+
+</body>
+</html>
