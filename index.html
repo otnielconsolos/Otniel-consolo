@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Otniel Consolos</title>
   <style>
     * {
@@ -179,7 +179,7 @@
       color: #ffb3c9;
     }
 
-    /* ===== CALCULADORA ===== */
+    /* CALCULADORA */
     .calculadora-box {
       background: linear-gradient(145deg, rgba(20, 10, 15, 0.95), rgba(40, 10, 30, 0.9));
       backdrop-filter: blur(12px);
@@ -336,7 +336,6 @@
       border: 1px solid rgba(255, 45, 117, 0.15);
     }
 
-    /* BARRA DE PROGRESSO */
     .barra-wrapper {
       margin-top: 18px;
       padding-top: 16px;
@@ -489,7 +488,6 @@
 
   <div class="container">
 
-    <!-- CALCULADORA -->
     <div class="calculadora-box">
       <h2>
         📏 Calculadora de Tamanho Ideal
@@ -529,7 +527,6 @@
           <div class="frase-resultado" id="fraseResultado">Preencha os dados e calcule</div>
         </div>
 
-        <!-- BARRA DE PROGRESSO -->
         <div class="barra-wrapper">
           <div class="barra-labels">
             <span>10 cm</span>
@@ -537,7 +534,7 @@
           </div>
           <div class="barra-track">
             <div class="barra-fill" id="barraFill" style="width:0%;"></div>
-            <div class="barra-marcador" id="barraMarcador" data-valor="0" style="left:0%;"> </div>
+            <div class="barra-marcador" id="barraMarcador" data-valor="0" style="left:0%;"></div>
           </div>
         </div>
 
@@ -551,7 +548,6 @@
       </div>
     </div>
 
-    <!-- QUEM SOMOS -->
     <div class="box">
       <h2>💎 Quem Somos</h2>
       <p>
@@ -562,7 +558,6 @@
       </p>
     </div>
 
-    <!-- DIFERENCIAIS -->
     <div class="box">
       <h2>⭐ Nossos Diferenciais</h2>
       <div class="diferenciais">
@@ -573,7 +568,6 @@
       </div>
     </div>
 
-    <!-- FRASES -->
     <div class="box">
       <h2>💬 Frases</h2>
       <div class="frases-grid">
@@ -584,7 +578,6 @@
       </div>
     </div>
 
-    <!-- LOCALIZAÇÃO -->
     <div class="box">
       <h2>📍 Localização</h2>
       <p>
@@ -592,7 +585,6 @@
       </p>
     </div>
 
-    <!-- CONTATO -->
     <div class="box">
       <h2>📱 Contato</h2>
       <div class="contato-links">
@@ -621,7 +613,7 @@
   </footer>
 
   <script>
-    (function() {
+    document.addEventListener('DOMContentLoaded', function() {
       const calcularBtn = document.getElementById('calcularBtn');
       const idadeInput = document.getElementById('idade');
       const generoSelect = document.getElementById('genero');
@@ -633,7 +625,6 @@
       const barraFill = document.getElementById('barraFill');
       const barraMarcador = document.getElementById('barraMarcador');
 
-      // Frases por gênero e faixa
       const frases = {
         masculino: [
           { min: 8, max: 11, texto: "Frouxo, vai treinar esse cu" },
@@ -680,7 +671,7 @@
         return "Tamanho fora da escala...";
       }
 
-      function calcularTamanhoIdeal() {
+      function calcular() {
         const idade = parseFloat(idadeInput.value);
         const genero = generoSelect.value;
         const altura = parseFloat(alturaInput.value);
@@ -696,10 +687,9 @@
           return;
         }
 
-        // Fatores
         let fatorGenero = 1.0;
         if (genero === 'feminino') fatorGenero = 1.0;
-        else if (genero === 'masculino') fatorGenero = 0.85; // ânus menos elástico
+        else if (genero === 'masculino') fatorGenero = 0.85;
         else fatorGenero = 0.92;
 
         let fatorIdade = 1.0;
@@ -727,15 +717,21 @@
 
         tamanho = Math.round(tamanho * 10) / 10;
 
-        // Exibe resultado
         tamanhoIdealSpan.textContent = tamanho.toFixed(1);
         const frase = obterFrase(tamanho, genero);
         fraseResultado.textContent = frase;
 
-        // Destaque
         resultadoDiv.classList.add('destaque');
 
-        // Barra (10 a 40 cm)
         let percentual = ((tamanho - 10) / (40 - 10)) * 100;
         if (percentual < 0) percentual = 0;
-        if (percentual > 100) percentua
+        if (percentual > 100) percentual = 100;
+        barraFill.style.width = percentual + '%';
+        barraMarcador.style.left = percentual + '%';
+        barraMarcador.setAttribute('data-valor', tamanho.toFixed(1));
+      }
+
+      calcularBtn.addEventListener('click', calcular);
+
+      const inputs = [idadeInput, alturaInput, pesoInput, generoSelect];
+      inputs.forEach(in
